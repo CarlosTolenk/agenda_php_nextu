@@ -1,6 +1,4 @@
 
-
-
 class EventsManager {
     constructor() {
         this.obtenerDataInicial()
@@ -19,7 +17,7 @@ class EventsManager {
           success: (data) =>{
             if (data.msg=="OK") {
               this.poblarCalendario(data.eventos)
-            }else {
+            }else { 
               alert(data.msg)
               window.location.href = 'index.html';
             }
@@ -38,7 +36,7 @@ class EventsManager {
         		center: 'title',
         		right: 'month,agendaWeek,basicDay'
         	},
-        	defaultDate: '2016-11-01',
+        	defaultDate: '2017-03-31',
         	navLinks: true,
         	editable: true,
         	eventLimit: true,
@@ -109,10 +107,6 @@ class EventsManager {
                 end: $('#end_date').val()+" "+$('#end_hour').val()
               })
             }
-
-
-
-
           }else {
             alert(data.msg)
           }
@@ -196,14 +190,15 @@ class EventsManager {
 
 }
 
-
 $(function(){
   initForm();
   var e = new EventsManager();
   $('form').submit(function(event){
     event.preventDefault()
     e.anadirEvento()
-  })
+  });
+
+  
 });
 
 
