@@ -1,4 +1,3 @@
-
 class EventsManager {
     constructor() {
         this.obtenerDataInicial()
@@ -17,7 +16,7 @@ class EventsManager {
           success: (data) =>{
             if (data.msg=="OK") {
               this.poblarCalendario(data.eventos)
-            }else { 
+            }else {
               alert(data.msg)
               window.location.href = 'index.html';
             }
@@ -30,14 +29,20 @@ class EventsManager {
     }
 
     poblarCalendario(eventos) {
-        $('.calendario').fullCalendar({
+      var fecha_actual = new Date();
+      var year = fecha_actual.getFullYear();
+      var month = fecha_actual.getMonth();
+      var day = fecha_actual.getDate();
+
+      $('.calendario').fullCalendar({
             header: {
         		left: 'prev,next today',
         		center: 'title',
         		right: 'month,agendaWeek,basicDay'
         	},
-        	defaultDate: '2017-03-31',
-        	navLinks: true,
+        	defaultDate: "'"+year+'-'+month+'-'+day+"'",
+
+          navLinks: true,
         	editable: true,
         	eventLimit: true,
           droppable: true,
@@ -107,6 +112,10 @@ class EventsManager {
                 end: $('#end_date').val()+" "+$('#end_hour').val()
               })
             }
+
+
+
+
           }else {
             alert(data.msg)
           }
@@ -190,15 +199,14 @@ class EventsManager {
 
 }
 
+
 $(function(){
   initForm();
   var e = new EventsManager();
   $('form').submit(function(event){
     event.preventDefault()
     e.anadirEvento()
-  });
-
-  
+  })
 });
 
 

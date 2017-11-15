@@ -1,40 +1,38 @@
 <?php
-require('../server/lib.php');
 
-$con = new ConectorBD();
+  require('conector.php');
 
-if ($con->initConexion()=='OK'){
-    $datos['nombres'] = "'Carlos Tolentino'";
-    $datos['correo'] = "'carlostolentino@gmail.com'";
-    $datos['password'] = "'".password_hash("123",PASSWORD_DEFAULT)."'";
-    $datos['fecnac'] = "'12/05/1990'";
-
-    if ($con->insertData('usuarios', $datos)) {
-      echo "Se han registrado los datos correctamente";
-    }else echo "Se ha producido un error en la actualización";
-
-    $datos['nombres'] = "'Paola Lazala'";
-    $datos['correo'] = "'paolalazala@gmail.com'";
-    $datos['password'] = "'".password_hash("123",PASSWORD_DEFAULT)."'";
-    $datos['fecnac'] = "'01/08/1991'";
-
-    if ($con->insertData('usuarios', $datos)) {
-      echo "Se han registrado los datos correctamente";
-    }else echo "Se ha producido un error en la actualización";
-
-    $datos['nombres'] = "'Raul Mondesi'";
-    $datos['correo'] = "'rmondesi@gmail.com'";
-    $datos['password'] = "'".password_hash("123",PASSWORD_DEFAULT)."'";
-    $datos['fecnac'] = "'09/11/1986'";
-
-    if ($con->insertData('usuarios', $datos)) {
-      echo "Se han registrado los datos correctamente";
-    }else echo "Se ha producido un error en la actualización";
+  $con = new ConectorBD();
+  $con->initConexion('agenda');
 
 
-    $con->cerrarConexion();
-}else {
-    echo "Se presentó un error en la conexión";
-}
+//**********Primera inseccion************//
+  $hash = password_hash('123456', PASSWORD_DEFAULT);
+  $data['username']= '"carlos.tolentino@gmail.com"';
+  $data['password']= '"'.$hash.'"';
+  $data['nombre']='"Carlos Tolentino"';
+  $data['fecha_nacimiento']='"1991-11-23"';
 
-?>-
+  $con->insertData('usuarios', $data);
+
+
+//**********Segunda inseccion************//
+  $hash = password_hash('123456', PASSWORD_DEFAULT);
+  $data['username']= '"paola.lazala@gmail.com"';
+  $data['password']= '"'.$hash.'"';
+  $data['nombre']='"Paola Lazala"';
+  $data['fecha_nacimiento']='"1992-10-23"';
+
+  $con->insertData('usuarios', $data);
+
+
+//**********Tercera inseccion************//
+  $hash = password_hash('123456', PASSWORD_DEFAULT);
+  $data['username']= '"tolentinoe@gmail.com"';
+  $data['password']= '"'.$hash.'"';
+  $data['nombre']='"Carlos Tolentino"';
+  $data['fecha_nacimiento']='"1991-11-23"';
+
+  $con->insertData('usuarios', $data);
+
+?>
